@@ -16,12 +16,20 @@ def inventory_master() -> None:
         item_name = parts[0]
         qty_str = parts[1]
 
+        if item_name == "":
+            print(f"Error - invalid parameter '{arg}'")
+            continue
+
         if item_name in inventory:
             print(f"Redundant item '{item_name}' - discarding")
             continue
 
         try:
             qty = int(qty_str)
+            if qty < 0:
+                print(f"Quantity error for '{item_name}': quantity cannot "
+                      "be negative")
+                continue
             inventory[item_name] = qty
         except ValueError as e:
             print(f"Quantity error for '{item_name}': {e}")
@@ -34,7 +42,7 @@ def inventory_master() -> None:
     total_qty = sum(inventory.values())
     print(f"Total quantity of the {len(inventory)} items: {total_qty}")
 
-    if len(inventory) > 0 and total_qty != 0:
+    if len(inventory) > 0:
         most_item = ""
         most_qty = -1
         least_item = ""
@@ -43,8 +51,9 @@ def inventory_master() -> None:
         for item in inventory.keys():
             qty = inventory[item]
 
-            percentage = (qty / total_qty) * 100
-            print(f"Item {item} represents {round(percentage, 1)}%")
+            if total_qty != 0:
+                percentage = (qty / total_qty) * 100
+                print(f"Item {item} represents {round(percentage, 1)}%")
 
             if qty > most_qty:
                 most_qty = qty
