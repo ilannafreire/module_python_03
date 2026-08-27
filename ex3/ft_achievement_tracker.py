@@ -1,15 +1,17 @@
 import random
 
 
+ACHIEVEMENTS = [
+    "Crafting Genius", "World Savior", "Master Explorer",
+    "Collector Supreme", "Untouchable", "Boss Slayer", "Strategist",
+    "Speed Runner", "Survivor", "Treasure Hunter", "First Steps",
+    "Sharp Mind", "Unstoppable", "Hidden Path Finder"
+]
+
+
 def gen_player_achievements() -> set[str]:
-    achievements = [
-        "Crafting Genius", "World Savior", "Master Explorer",
-        "Collector Supreme", "Untouchable", "Boss Slayer", "Strategist",
-        "Speed Runner", "Survivor", "Treasure Hunter", "First Steps",
-        "Sharp Mind", "Unstoppable", "Hidden Path Finder"
-    ]
     amount = random.randint(5, 9)
-    return set(random.sample(achievements, amount))
+    return set(random.sample(ACHIEVEMENTS, amount))
 
 
 def main() -> None:
@@ -44,10 +46,11 @@ def main() -> None:
     print(f"Only Charlie has: {charlie_only}")
     print(f"Only Dylan has: {dylan_only}\n")
 
-    print(f"Alice is missing: {all_unique.difference(alice)}")
-    print(f"Bob is missing: {all_unique.difference(bob)}")
-    print(f"Charlie is missing: {all_unique.difference(charlie)}")
-    print(f"Dylan is missing: {all_unique.difference(dylan)}")
+    all_achievements = set(ACHIEVEMENTS)
+    print(f"Alice is missing: {all_achievements.difference(alice)}")
+    print(f"Bob is missing: {all_achievements.difference(bob)}")
+    print(f"Charlie is missing: {all_achievements.difference(charlie)}")
+    print(f"Dylan is missing: {all_achievements.difference(dylan)}")
 
 
 if __name__ == "__main__":
